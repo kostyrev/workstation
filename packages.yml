@@ -1,0 +1,12 @@
+---
+
+- hosts: localhost
+  sudo: true
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: "just install the packages with no configuration needed"
+      yum: name="{{ item }}" state=present
+      with_items:
+        - guake
