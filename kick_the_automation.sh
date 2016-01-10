@@ -1,4 +1,5 @@
 #!/bin/bash
+
 . /etc/os-release
 
 usage()
@@ -16,15 +17,44 @@ OPTIONS:
 EOF
 }
 
+prompt_for_password() {
+    read -sp "Enter the password to authenticate to NTLM proxy: " PASSWD
+}
+
+render_config() {
+cat <<EOF | sudo tee /etc/cntlm.conf >/dev/null
+
+Username    ${USERNAME}
+Domain      ${DOMAIN}
+${NTLM_HASH}
+
+Proxy       ${IP_NTLM_PROXY}
+
+Listen      127.0.0.1:3128
+
+EOF
+
+}
+
+ansible_is_available() {
+    echo -e "\e[32mAnd finally we've got ansible! Now we can do whatever we want!\e[m"
+    echo
+    echo "Run:"
+    echo -e "\e[100mansible-playbook -i \"localhost,\" packages.yml --diff \e[m"
+    echo "for example"
+}
+
 USERNAME=${USER}
 
 
 case ${REDHAT_SUPPORT_PRODUCT_VERSION} in 
     21)
         CNTLM_VERSION=0.92.3-7
+        RPM_PROXY_CONFIG=/etc/yum.conf
         ;;
     23)    
         CNTLM_VERSION=0.92.3-8
+        RPM_PROXY_CONFIG=/etc/dnf/dnf.conf
         ;;
 esac
 
@@ -65,19 +95,55 @@ then
      exit 1
 fi
 
-# __cntlm_is_installed=$(rpm -q cntlm)
-rpm -q cntlm >/dev/null 2>&1
-
-if [[ $? -ne 0 ]]; then
-    read -sp "Password to authenticate to NTLM proxy: " PASSWD
-    cd ~/Downloads && { curl -O --proxy-ntlm --proxy-user ${USERNAME}:${PASSWD} --proxy "${IP_NTLM_PROXY}" http://mirror.yandex.ru/fedora/linux/releases/${REDHAT_SUPPORT_PRODUCT_VERSION}/Everything/${HARDWARE_PLATFORM}/os/Packages/c/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm ; cd -; }
-    sudo rpm -Uhv ~/Downloads/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm
+if [ ! -f ~/Downloads/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm ];
+    then
+        prompt_for_password
+        if [ ! -z ${PASSWD} ]; then
+            cd ~/Downloads && { curl -O --proxy-ntlm --proxy-user ${USERNAME}:${PASSWD} --proxy "${IP_NTLM_PROXY}" http://mirror.yandex.ru/fedora/linux/releases/${REDHAT_SUPPORT_PRODUCT_VERSION}/Everything/${HARDWARE_PLATFORM}/os/Packages/c/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm ; cd -; }
+        fi
+    else
+        rpm -q cntlm >/dev/null 2>&1
+        if [[ $? -ne 0 ]]; then
+            sudo rpm -Uhv ~/Downloads/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm
+        fi
 fi
 
 CNTLM_CONFIG=$(rpm -qc cntlm | grep '\.conf$')
 
-grep ${USERNAME} ${CNTLM_CONFIG} >/dev/null 2>&1
+sudo grep ${USERNAME} ${CNTLM_CONFIG} >/dev/null 2>&1
 
 if [[ $? -ne 0 ]]; then
-    NTLM_HASH=$(cntlm -H -u ${USERNAME} -d ${DOMAIN} -p ${PASSWD})
-fi    
+    if [ -z ${PASSWD} ]; then
+        prompt_for_password
+    fi
+
+    NTLM_HASH=$(echo ${PASSWD} | cntlm -H -u ${USERNAME} -d ${DOMAIN} | grep PassNTLMv2)
+    render_config
+    sudo service cntlm start
+fi
+
+sudo service cntlm status >/dev/null 2>&1
+
+if [[ $? -ne 0 ]]; then
+    echo "Failed to start cntlm service"
+    exit 3
+fi
+
+grep proxy ${RPM_PROXY_CONFIG} >/dev/null
+
+if [[ $? -ne 0 ]]; then
+    echo 'proxy=http://127.0.0.1:3128' | sudo tee -a ${RPM_PROXY_CONFIG} 1>/dev/null
+fi
+
+rpm -q ansible >/dev/null 2>&1
+
+if [[ $? -ne 0 ]]; then
+    sudo yum install ansible -y
+    if [[ $? -eq 0 ]]; then
+        ansible_is_available
+    else
+        echo -e "\e[41m $0 failed to install ansible!\e[m"
+    fi
+else
+    ansible_is_available
+fi
