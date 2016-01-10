@@ -9,6 +9,7 @@ This script retires sandbox deployment
 
 OPTIONS:
    -h      Show this message
+   -s      Skip sudo configuration
    -v      Be verbose
 EOF
 
@@ -16,12 +17,15 @@ EOF
 
 VERBOSE=0
 
-while getopts “vh” OPTION
+while getopts “vhs” OPTION
 do
      case $OPTION in
          h)
              usage
              exit 1
+             ;;
+         s)
+             SKIP_SUDO_STEP=1
              ;;
          v)
              VERBOSE=1
@@ -42,9 +46,15 @@ fi
 
 echo -e "\e[100mInstalling ansible roles...\e[m"
 http_proxy=http://127.0.0.1:3128 ansible-galaxy install -r Ansiblefile.yml --force 1>/dev/null
-echo
-echo -e "\e[100m  Using sudo password for the last time...\e[m"
-ansible-playbook plays/initial.yml ${verbose_arg} --become --ask-become-pass
-echo
+
+if [[ -z ${SKIP_SUDO_STEP} ]];
+    then
+      echo
+      exit 3
+      echo -e "\e[100m  Using sudo password for the last time...\e[m"
+      ansible-playbook plays/initial.yml ${verbose_arg} --become --ask-become-pass
+      echo
+fi
+
 echo -e "  \e[100mHere comes the magic...\e[m"
 ansible-playbook plays/02_bootstrap.yml ${verbose_arg}
