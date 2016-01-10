@@ -1,0 +1,4 @@
+---
+
+- include: 00_setup_ansible.yml
+- include: 01_configure_sudo.yml

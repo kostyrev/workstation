@@ -39,9 +39,8 @@ EOF
 ansible_is_available() {
     echo -e "\e[32mAnd finally we've got ansible! Now we can do whatever we want!\e[m"
     echo
-    echo "Run:"
-    echo -e "  \e[100mansible-playbook -i \"localhost,\" packages.yml --diff --ask-sudo-pass \e[m"
-    echo "for example"
+    echo "Now run:"
+    echo -e "  \e[100m./dance_for_me_monkey.sh \e[m"
 }
 
 USERNAME=${USER}
@@ -119,14 +118,18 @@ if [[ $? -ne 0 ]]; then
 
     NTLM_HASH=$(echo ${PASSWD} | cntlm -H -u ${USERNAME} -d ${DOMAIN} | grep PassNTLMv2)
     render_config
+    sudo chkconfig cntlm on
     sudo service cntlm start
 fi
 
 sudo service cntlm status >/dev/null 2>&1
 
 if [[ $? -ne 0 ]]; then
-    echo "Failed to start cntlm service"
-    exit 3
+    sudo service cntlm start
+    if [[ $? -ne 0 ]]; then
+        echo "Failed to start cntlm service"
+        exit 3
+    fi        
 fi
 
 grep proxy ${RPM_PROXY_CONFIG} >/dev/null

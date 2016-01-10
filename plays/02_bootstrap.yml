@@ -1,6 +1,7 @@
 ---
 
 - hosts: localhost
+  become: true
   tasks:
 
     - name: creating .ssh directory
@@ -19,3 +20,8 @@
       yum: name={{ item }} state=latest
       with_items:
         - google-chrome-stable
+
+    - name: "just install the packages with no configuration needed"
+      action: "{{ ansible_pkg_mgr }} name={{ item }} state=present"
+      with_items:
+        - guake
