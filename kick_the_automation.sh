@@ -10,7 +10,7 @@ usage: $0 options
 This script initiates all the magic
 
 OPTIONS:
-   -u      Username to authenticate to NTLM proxy
+   -u      Username to authenticate to NTLM proxy. By default \${USER}
    -d      Domain to authenticate to NTLM proxy
    -i      IP:PORT of NTLM proxy
    -v      cntlm package version [0.92.3-8] as in cntlm-0.92.3-8.fc23.x86_64.rpm
@@ -40,7 +40,7 @@ ansible_is_available() {
     echo -e "\e[32mAnd finally we've got ansible! Now we can do whatever we want!\e[m"
     echo
     echo "Run:"
-    echo -e "\e[100mansible-playbook -i \"localhost,\" packages.yml --diff \e[m"
+    echo -e "  \e[100mansible-playbook -i \"localhost,\" packages.yml --diff --ask-sudo-pass \e[m"
     echo "for example"
 }
 
