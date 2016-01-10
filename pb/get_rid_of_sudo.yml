@@ -1,0 +1,5 @@
+---
+
+- include: ../plays/00_setup_ansible.yml
+- include: ../plays/01_install_roles.yml
+- include: ../plays/02_configure_sudo.yml

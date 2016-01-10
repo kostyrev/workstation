@@ -1,0 +1,7 @@
+sshd:
+  PermitRootLogin: no
+  PasswordAuthentication: no
+  GSSAPIAuthentication: no
+  ClientAliveCountMax: 3
+  ClientAliveInterval: 15
+  UseDNS: no

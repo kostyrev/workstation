@@ -12,5 +12,8 @@ So it goes like this:
     - configure yum (dnf) to work through the cntlm
     - download ansible and then
 
-### Provision workstation with ansible
-ansible-playbook -i "localhost," packages.yml --diff --ask-sudo-pass
+### Get rid of sudo password prompt
+ansible-playbook pb/get_rid_of_sudo.yml --diff --become --ask-become-pass
+
+### Bootstrap workstation with ansible
+ansible-playbook plays/03_bootstrap.yml --diff

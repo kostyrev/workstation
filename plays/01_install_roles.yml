@@ -1,0 +1,10 @@
+---
+
+- hosts: 127.0.0.1
+  become: false
+  gather_facts: false
+  tasks:
+    - name: install roles from Ansiblefile.yml
+      command: "ansible-galaxy install -r {{ inventory_dir }}/Ansiblefile.yml --force"
+      environment:
+        http_proxy: http://127.0.0.1:3128

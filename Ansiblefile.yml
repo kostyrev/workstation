@@ -1,0 +1,12 @@
+- src: https://github.com/picotrading/ansible-sudo.git
+  name: jtyr.sudo
+  path: ../roles
+
+- src: https://github.com/willshersystems/ansible-sshd
+  name: willshersystems.sshd
+  version: 0.4.0
+  path: ../roles
+
+- src: https://github.com/weareinteractive/ansible-vim.git
+  name: franklinkim.vim
+  path: ../roles
