@@ -12,3 +12,10 @@
   roles:
     - willshersystems.sshd
     - franklinkim.vim
+    - groks.repo-google
+
+  post_tasks:
+    - name: install google software
+      yum: name={{ item }} state=latest
+      with_items:
+        - google-chrome-stable
