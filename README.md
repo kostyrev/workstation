@@ -14,3 +14,13 @@ So it goes like this:
 
 ### Dance for me, monkey! Dance for my pleasure!(c)
 ./dance_for_me_monkey.sh
+
+
+
+
+
+
+### Todo
+- virtualbox
+- vagrant
+- docker
