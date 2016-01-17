@@ -151,6 +151,7 @@ if [[ $? -ne 0 ]]; then
         ansible_is_available
     else
         echo -e "\e[41m $0 failed to install ansible!\e[m"
+        exit 3
     fi
 else
     ansible_is_available
