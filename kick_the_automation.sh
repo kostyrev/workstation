@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . /etc/os-release
+DOWNLOADS_PATH=${HOME}
 
 usage()
 {
@@ -98,16 +99,16 @@ then
      exit 1
 fi
 
-if [ ! -f ~/Downloads/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm ];
+if [ ! -f ${DOWNLOADS_PATH}/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm ];
     then
         prompt_for_password
         if [ ! -z ${PASSWD} ]; then
-            cd ~/Downloads && { curl -O --proxy-ntlm --proxy-user ${USERNAME}:${PASSWD} --proxy "${IP_NTLM_PROXY}" http://mirror.yandex.ru/fedora/linux/releases/${REDHAT_SUPPORT_PRODUCT_VERSION}/Everything/${HARDWARE_PLATFORM}/os/Packages/c/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm ; cd -; }
+            cd ${DOWNLOADS_PATH} && { curl -O --proxy-ntlm --proxy-user ${USERNAME}:${PASSWD} --proxy "${IP_NTLM_PROXY}" http://mirror.yandex.ru/fedora/linux/releases/${REDHAT_SUPPORT_PRODUCT_VERSION}/Everything/${HARDWARE_PLATFORM}/os/Packages/c/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm ; cd -; }
         fi
     else
         rpm -q cntlm >/dev/null 2>&1
         if [[ $? -ne 0 ]]; then
-            sudo rpm -Uhv ~/Downloads/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm
+            sudo rpm -Uhv ${DOWNLOADS_PATH}/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm
         fi
 fi
 
