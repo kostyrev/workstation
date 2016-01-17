@@ -105,12 +105,13 @@ if [ ! -f ${DOWNLOADS_PATH}/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VE
         if [ ! -z ${PASSWD} ]; then
             cd ${DOWNLOADS_PATH} && { curl -O --proxy-ntlm --proxy-user ${USERNAME}:${PASSWD} --proxy "${IP_NTLM_PROXY}" http://mirror.yandex.ru/fedora/linux/releases/${REDHAT_SUPPORT_PRODUCT_VERSION}/Everything/${HARDWARE_PLATFORM}/os/Packages/c/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm ; cd -; }
         fi
-    else
-        rpm -q cntlm >/dev/null 2>&1
-        if [[ $? -ne 0 ]]; then
-            sudo rpm -Uhv ${DOWNLOADS_PATH}/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm
-        fi
 fi
+
+rpm -q cntlm >/dev/null 2>&1
+
+    if [[ $? -ne 0 ]]; then
+        sudo rpm -Uhv ${DOWNLOADS_PATH}/cntlm-${CNTLM_VERSION}.fc${REDHAT_SUPPORT_PRODUCT_VERSION}.${HARDWARE_PLATFORM}.rpm
+    fi
 
 CNTLM_CONFIG=$(rpm -qc cntlm | grep '\.conf$')
 
