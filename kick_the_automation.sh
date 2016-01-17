@@ -121,7 +121,7 @@ if [[ $? -ne 0 ]]; then
         prompt_for_password
     fi
 
-    NTLM_HASH=$(echo ${PASSWD} | cntlm -H -u ${USERNAME} -d ${DOMAIN} | grep PassNTLMv2)
+    NTLM_HASH=$(echo "${PASSWD}" | cntlm -H -u ${USERNAME} -d ${DOMAIN} | grep PassNTLMv2)
     render_config
     sudo chkconfig cntlm on
     sudo service cntlm start
