@@ -2,13 +2,12 @@
 
 - hosts: localhost
   become: true
+
   tasks:
 
-    - name: creating .ssh directory
-      action: file path={{ lookup('env','HOME') }}/.ssh owner={{ lookup('env','USER') }} group={{ lookup('env','USER') }} state=directory mode=0700
-
-    - name: uploading ssh keys
-      action: copy src=../files/ssh_authorized_keys/{{ lookup('env','USER') | lower }}.pub dest={{ lookup('env','HOME') }}/.ssh/authorized_keys owner={{ lookup('env','USER') }} group={{ lookup('env','USER') }} mode=0600
+  # Don't even remember what I was doing
+  - include: ssh_key.yml
+    when: manage_ssh_keys is defined
 
   roles:
     - willshersystems.sshd
