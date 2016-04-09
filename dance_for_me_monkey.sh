@@ -62,7 +62,7 @@ if [[ -z ${SKIP_SUDO_STEP} ]];
     then
       echo
       echo -e "\e[100m  Using sudo password for the last time...\e[m"
-      ansible-playbook plays/initial.yml ${verbose_arg} --become --ask-become-pass
+      ansible-playbook plays/initial.yml ${verbose_arg} --become --ask-become-pass || exit 3
       echo
 fi
 
