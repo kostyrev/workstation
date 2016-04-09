@@ -3,11 +3,9 @@
 - hosts: localhost
   become: true
 
-  tasks:
+  pre_tasks:
 
-  # Don't even remember what I was doing
-  - include: ssh_key.yml
-    when: manage_ssh_keys is defined
+    - include: ssh_key.yml
 
   roles:
     - willshersystems.sshd
