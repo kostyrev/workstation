@@ -26,6 +26,8 @@
         - vlc
         - sublime_text
         - liberation-fonts
+        - torbrowser-launcher
+        - ncdu
       tags: packages
 
     - name: just install the packages with no configuration needed
