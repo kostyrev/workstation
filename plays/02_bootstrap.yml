@@ -28,6 +28,7 @@
         - liberation-fonts
         - torbrowser-launcher
         - ncdu
+        - vagrant
       tags: packages
 
     - name: just install the packages with no configuration needed
