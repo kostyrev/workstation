@@ -29,6 +29,7 @@
         - torbrowser-launcher
         - ncdu
         - vagrant
+        - strace
       tags: packages
 
     - name: just install the packages with no configuration needed
