@@ -19,5 +19,5 @@ sudo_users:
   - '%wheel':
       host: ALL
       runas: ALL
-      tag: NOPASSWD
+      tag: ''
       cmd: ALL

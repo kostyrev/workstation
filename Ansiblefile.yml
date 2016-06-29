@@ -1,3 +1,6 @@
+- src: jtyr.environment
+  path: roles
+
 - src: https://github.com/picotrading/ansible-sudo.git
   name: jtyr.sudo
   path: roles

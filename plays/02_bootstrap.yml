@@ -8,6 +8,7 @@
     - include: ssh_key.yml
 
   roles:
+    - jtyr.environment
     - willshersystems.sshd
     - franklinkim.vim
     - groks.repo-google
@@ -19,6 +20,7 @@
         name: "{{ item }}"
         state: latest
       with_items:
+        - krb5-workstation
         - google-chrome-stable
         - deadbeef
         - guake
@@ -32,9 +34,3 @@
         - strace
       tags: packages
 
-    - name: just install the packages with no configuration needed
-      package:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - guake
