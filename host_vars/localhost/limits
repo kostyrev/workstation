@@ -1,0 +1,11 @@
+limits_pam_files: {}
+limits_conf_d_files:
+  95-nofile.conf:
+    - domain: "{{ lookup('env','USER') | lower }}"
+      type: soft
+      item: nofile
+      value: 102400
+    - domain: "{{ lookup('env','USER') | lower }}"
+      type: hard
+      item: nofile
+      value: 102400

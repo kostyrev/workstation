@@ -21,3 +21,7 @@
 - src: https://github.com/eddyhub/ansible-virtualbox
   name: eddyhub.virtualbox
   path: roles
+
+- src: https://github.com/Oefenweb/ansible-limits.git
+  name: tersmitten.limits
+  path: roles
