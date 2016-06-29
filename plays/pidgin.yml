@@ -1,0 +1,14 @@
+---
+
+- hosts: localhost
+  become: true
+
+  tasks:
+
+    - name: install pidgin
+      package:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - pidgin
+        - pidgin-sipe
