@@ -20,6 +20,8 @@
         name: "{{ item }}"
         state: latest
       with_items:
+        - tmux
+        - corkscrew
         - krb5-workstation
         - google-chrome-stable
         - deadbeef
