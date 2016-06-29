@@ -56,6 +56,10 @@ case ${REDHAT_SUPPORT_PRODUCT_VERSION} in
         CNTLM_VERSION=0.92.3-8
         RPM_PROXY_CONFIG=/etc/dnf/dnf.conf
         ;;
+    24)
+        CNTLM_VERSION=0.92.3-9
+        RPM_PROXY_CONFIG=/etc/dnf/dnf.conf
+        ;;
     *)
         echo "${REDHAT_SUPPORT_PRODUCT} ${REDHAT_SUPPORT_PRODUCT_VERSION} is not supported OS"
         exit 3
