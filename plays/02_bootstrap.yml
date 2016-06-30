@@ -40,6 +40,9 @@
         - java-1.8.0-oracle-plugin
       tags: packages
 
+#TODO
+# sudo ln -sf /usr/lib/jvm/java-1.8.0-oracle-1.8.0.92.x86_64/jre/lib/amd64/libnpjp2.so /usr/lib64/mozilla/plugins/
+
     - name: add current user to vboxusers group
       user:
         name="{{ lookup('env','USER') }}"
