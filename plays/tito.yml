@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  tasks:
+
+    - name: install packaging stuff
+      package:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - tito
+        - rpmdevtools
+        - nosync
+      tags:
+        - package
+

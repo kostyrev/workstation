@@ -1,0 +1,12 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  become: true
+
+  tasks:
+
+    - file: path=/etc/dhcp/dhclient.conf owner=root group=root mode=0644
+    - lineinfile: dest=/etc/dhcp/dhclient.conf regexp=dhcp-client-identifier line='send dhcp-client-identifier = hardware;'
+

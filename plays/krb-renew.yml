@@ -1,0 +1,13 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - cron:
+        name: "renew Kerberos ticket every four hours"
+        minute: "0"
+        hour: "*/4"
+        job: "kinit -R"
+        user: "{{ lookup('env','USER') }}"
