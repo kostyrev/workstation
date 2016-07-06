@@ -38,6 +38,7 @@
         - java-1.8.0-oracle
         - java-1.8.0-oracle-headless
         - java-1.8.0-oracle-plugin
+        - ipmitool
       tags: packages
 
 #TODO
