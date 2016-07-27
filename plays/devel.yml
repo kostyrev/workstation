@@ -1,0 +1,13 @@
+---
+
+- hosts: localhost
+  become: true
+
+  tasks:
+
+    - name: install {{ item }}
+      package:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - python-devel
