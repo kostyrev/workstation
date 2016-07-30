@@ -1,0 +1,14 @@
+- hosts: localhost
+  become: true
+
+  tasks:
+    - name: install deps for molecule
+      package:
+        name: "{{ item }}"
+      with_items:
+        - redhat-rpm-config
+        - python-devel
+
+    - name: install molecule
+      pip:
+        name: molecule
