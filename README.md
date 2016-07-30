@@ -2,7 +2,7 @@ After rebuilding OS on my workstations I want to run just one command to re-conf
 
 ### Behind NTLM proxy
 At my work one cannot simply install git, ansible.  
-One have to install cntlm to be able to download all the packages.  
+One have to configure some sort of a proxy server (I prefer cntlm) to be able to download any packages.  
 So it goes like this:
   - manually configure Mozilla's proxy settings to point to corporate proxy
   - download https://github.com/kostyrevaa/workstation/archive/master.zip
@@ -21,6 +21,5 @@ So it goes like this:
 
 
 ### Todo
-- virtualbox
 - vagrant
 - docker
