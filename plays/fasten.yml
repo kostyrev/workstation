@@ -1,0 +1,17 @@
+---
+
+- hosts: localhost
+  become: true
+
+  tasks:
+
+    - name: install software
+      package:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - openssl-devel
+        - libffi-devel
+        - ruby-devel
+        - graphviz
+      tags: packages
