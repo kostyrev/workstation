@@ -18,7 +18,7 @@
   name: groks.repo-google
   path: roles
 
-- src: https://github.com/kostyrevaa/ansible-virtualbox.git
+- src: https://github.com/eddyhub/ansible-virtualbox.git
   name: eddyhub.virtualbox
   path: roles
 
