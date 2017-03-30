@@ -28,6 +28,5 @@ package_list:
     - torbrowser-launcher
     - tree
     - unzip
-    - vagrant
     - vlc
     - xfsprogs

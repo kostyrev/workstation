@@ -1,6 +1,6 @@
 ---
 
 - hosts: localhost
-  become: true
+  connection: local
   roles:
-    - andrewrothstein.vagrant
+    - akostyrev.vagrant

@@ -19,6 +19,7 @@
 - src: https://github.com/Oefenweb/ansible-limits.git
   name: tersmitten.limits
 
-- src: kostyrevaa.terraform
+- src: akostyrev.terraform
+- src: akostyrev.vagrant
 
 - src: GROG.package

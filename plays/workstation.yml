@@ -7,3 +7,4 @@
 - include: packages.yml
 - include: terraform.yml
 - include: virtualbox.yml
+- include: vagrant.yml
