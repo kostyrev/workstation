@@ -14,4 +14,4 @@ So it goes like this:
   - run `source use_proxy` to export proxy settings
 
 ### Run Ansible
-execute `make` and `make install`
+execute `make`
