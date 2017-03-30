@@ -1,8 +1,12 @@
 ---
 
 - hosts: localhost
-  become: true
-
   roles:
     - eddyhub.virtualbox
 
+  post_tasks:
+    - name: add current user to vboxusers group
+      user:
+        name: "{{ lookup('env','USER') }}"
+        groups: vboxusers
+        append: yes

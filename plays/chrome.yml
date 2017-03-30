@@ -1,0 +1,14 @@
+- hosts: localhost
+  roles:
+    - groks.repo-google
+
+  post_tasks:
+
+    - name: install chrome
+      package:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - google-chrome-stable
+      tags:
+        - skip_ansible_lint

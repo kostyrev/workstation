@@ -1,5 +1,0 @@
----
-
-- include: 00_setup_ansible.yml
-- include: 02_bootstrap.yml
-

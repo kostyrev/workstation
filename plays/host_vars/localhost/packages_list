@@ -1,0 +1,33 @@
+---
+package_update_cache: true
+package_list:
+  name:
+    - "{{ 'python-pip' if ansible_os_family == 'Debian' else '/usr/bin/pip' }}"
+    - bash-completion
+    - corkscrew
+    - deadbeef
+    - git
+    - guake
+    - java-1.8.0-oracle
+    - java-1.8.0-oracle-headless
+    - java-1.8.0-oracle-plugin
+    - jq
+    - krb5-workstation
+    - liberation-fonts
+    - lsof
+    - mc
+    - moreutils
+    - mtr
+    - ncdu
+    - pwgen
+    - skype
+    - strace
+    - sublime_text
+    - telnet
+    - tmux
+    - torbrowser-launcher
+    - tree
+    - unzip
+    - vagrant
+    - vlc
+    - xfsprogs

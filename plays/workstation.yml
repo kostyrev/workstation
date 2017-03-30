@@ -1,0 +1,9 @@
+---
+
+- include: ansible_deps.yml
+- include: limits.yml
+- include: vim.yml
+- include: chrome.yml
+- include: packages.yml
+- include: terraform.yml
+- include: virtualbox.yml

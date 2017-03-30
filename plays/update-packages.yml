@@ -1,0 +1,9 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Update all packages
+      package:
+        name: "*"
+        state: latest
+      tags:
+        - skip_ansible_lint

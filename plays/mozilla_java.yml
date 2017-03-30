@@ -1,0 +1,33 @@
+---
+
+# Use this play to configure Oracle Java plugin for Mozilla Firefox
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - name: get java link
+      stat:
+        path: /etc/alternatives/java
+      register: java_lnk
+
+    - set_fact:
+        libnpjp2_path: "{{ java_lnk.stat.lnk_source | dirname }}/../lib/amd64/libnpjp2.so"
+      tags:
+        - skip_ansible_lint
+
+    - name: check if libnpjp2_path exists
+      stat:
+        path: "{{ libnpjp2_path }}"
+      register: libnpjp2_exists
+
+    - name: create symlink into /usr/lib64/mozilla/plugins/
+      become: yes
+      file:
+        state: link
+        src: "{{ libnpjp2_path }}"
+        dest: /usr/lib64/mozilla/plugins/libnpjp2.so
+      when: libnpjp2_exists.stat.exists == True
