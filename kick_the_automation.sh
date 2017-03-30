@@ -47,12 +47,12 @@ ansible_is_available() {
 USERNAME=${USER}
 
 
-case ${REDHAT_SUPPORT_PRODUCT_VERSION} in 
+case ${REDHAT_SUPPORT_PRODUCT_VERSION} in
     21)
         CNTLM_VERSION=0.92.3-7
         RPM_PROXY_CONFIG=/etc/yum.conf
         ;;
-    23)    
+    23)
         CNTLM_VERSION=0.92.3-8
         RPM_PROXY_CONFIG=/etc/dnf/dnf.conf
         ;;
@@ -86,7 +86,7 @@ do
              ;;
          i)
              IP_NTLM_PROXY=${OPTARG}
-             ;;             
+             ;;
          v)
              CNTLM_VERSION=${OPTARG}
              ;;
@@ -139,7 +139,7 @@ if [[ $? -ne 0 ]]; then
     if [[ $? -ne 0 ]]; then
         echo "Failed to start cntlm service"
         exit 3
-    fi        
+    fi
 fi
 
 grep proxy ${RPM_PROXY_CONFIG} >/dev/null
@@ -151,7 +151,7 @@ fi
 rpm -q ansible >/dev/null 2>&1
 
 if [[ $? -ne 0 ]]; then
-    sudo yum install ansible -y
+    sudo dnf install -y --enablerepo updates-testing ansible
     if [[ $? -eq 0 ]]; then
         ansible_is_available
     else
