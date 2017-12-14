@@ -23,3 +23,6 @@
 - src: akostyrev.vagrant
 
 - src: GROG.package
+
+- src: https://github.com/geerlingguy/ansible-role-docker.git
+  name: geerlingguy.docker
