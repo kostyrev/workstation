@@ -26,3 +26,9 @@
 
 - src: https://github.com/geerlingguy/ansible-role-docker.git
   name: geerlingguy.docker
+
+- src: https://github.com/andrewrothstein/ansible-kubernetes-helm
+  name: andrewrothstein.kubernetes-helm
+
+- src: https://github.com/andrewrothstein/ansible-kops.git
+  name: andrewrothstein.kops
