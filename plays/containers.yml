@@ -1,0 +1,4 @@
+- include: kubernetes-helm.yml
+- include: kubernetes-kops.yml
+- include: kubernetes-kubectl.yml
+- include: docker.yml

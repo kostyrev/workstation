@@ -5,6 +5,6 @@
 - hosts: localhost
   connection: local
   vars:
-    terraform_version: 0.9.2
+    terraform_version: 0.11.3
   roles:
     - akostyrev.terraform

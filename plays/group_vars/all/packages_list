@@ -20,7 +20,6 @@ package_list:
     - mtr
     - ncdu
     - pwgen
-    - skype
     - strace
     - sublime_text
     - telnet
@@ -30,3 +29,4 @@ package_list:
     - unzip
     - vlc
     - xfsprogs
+    - entr

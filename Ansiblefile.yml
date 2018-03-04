@@ -32,3 +32,6 @@
 
 - src: https://github.com/andrewrothstein/ansible-kops.git
   name: andrewrothstein.kops
+
+- src: https://github.com/andrewrothstein/ansible-kubectl
+  name: andrewrothstein.kubectl
