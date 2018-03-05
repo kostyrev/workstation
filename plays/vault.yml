@@ -1,0 +1,5 @@
+- hosts: localhost
+  connection: local
+  roles:
+    - role: kostyrev.vault
+      vault_version: 0.9.5

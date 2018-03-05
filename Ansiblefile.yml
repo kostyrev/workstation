@@ -35,3 +35,6 @@
 
 - src: https://github.com/andrewrothstein/ansible-kubectl
   name: andrewrothstein.kubectl
+
+- src: https://github.com/kostyrev/ansible-role-vault.git
+  name: kostyrev.vault
