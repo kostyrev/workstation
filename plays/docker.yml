@@ -2,4 +2,5 @@
   connection: local
   become: true
   roles:
-    - geerlingguy.docker
+    - role: geerlingguy.docker
+      docker_compose_path: /usr/bin/docker-compose
