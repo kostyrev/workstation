@@ -1,0 +1,10 @@
+---
+
+# ansible-playbook packer.yml --diff --become --ask-become-pass
+
+- hosts: localhost
+  connection: local
+  vars:
+    packer_version: 1.2.1
+  roles:
+    - kostyrev.packer

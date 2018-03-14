@@ -38,3 +38,6 @@
 
 - src: https://github.com/kostyrev/ansible-role-vault.git
   name: kostyrev.vault
+
+- src: https://github.com/kostyrev/ansible-role-packer.git
+  name: kostyrev.packer
